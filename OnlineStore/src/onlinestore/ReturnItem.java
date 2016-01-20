@@ -14,20 +14,24 @@ import java.util.ArrayList;
 public class ReturnItem extends Transaction{
     private ArrayList<Item> items;
     private double refund;
+    // i will represent index of items
+    private int i;
+    private int returnQuantity;
     private Item item;
+    private Inventory inventory;
     
     ReturnItem(int transNum, double refund){
         super(transNum);
         this.refund = refund;
         
+        inventory.setQuantity(null);
         
     }
     
     //adding item back to inventory 
-    public Item addItem(){
-        
-        item = new Item(item.getId(), item.getPrice(), item.getName());
-        
-        return item;
+    public int adjustInventory(){
+        //should return type in getQuantity be an integer?
+//       return inventory.getQuantity() + returnQuantity;
+        return 0;
     }
 }
