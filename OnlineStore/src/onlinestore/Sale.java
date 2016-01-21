@@ -13,16 +13,16 @@ import java.util.ArrayList;
  */
 public class Sale extends Transaction{
     private ArrayList<Item> items;
-    private double refund;
+    private double tender;
     // i will represent index of items
     private int i;
     private int returnQuantity;
-    private Item item;
-    private Inventory inventory;
     
-    Sale(int transNum, double refund){
+    
+    
+    Sale(int transNum, double tender){
         super(transNum);
-        this.refund = refund;
+        this.tender = tender;
         
         inventory.setQuantity(null);
         
@@ -30,8 +30,8 @@ public class Sale extends Transaction{
     
     //adding item back to inventory 
     public int adjustInventory(){
-        //should return type in getQuantity be an integer?
-//       return inventory.getQuantity() - purchaseQuantity;
+//      should return type in getQuantity be an integer?
+//      return inventory.getQuantity() - purchaseQuantity;
         return 0;
     }
     

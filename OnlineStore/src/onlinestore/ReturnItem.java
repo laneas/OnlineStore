@@ -24,6 +24,7 @@ public class ReturnItem extends Transaction{
         super(transNum);
         this.refund = refund;
         
+        
         inventory.setQuantity(null);
         
     }
@@ -33,5 +34,6 @@ public class ReturnItem extends Transaction{
         //should return type in getQuantity be an integer?
 //       return inventory.getQuantity() + returnQuantity;
         return 0;
+       
     }
 }
