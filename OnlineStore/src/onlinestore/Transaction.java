@@ -1,6 +1,6 @@
 package onlinestore;
 
-public class Transaction
+public abstract class Transaction
 {
     //private Customer customer;
     private int transactionID;
@@ -12,5 +12,11 @@ public class Transaction
         transactionID = transNum;
     }
     
+    /*
+    Generic methods for altering the inventory and funds
+    Child classes should handle this differently
+    */
+    public abstract void adjustInventory();
+    public abstract void adjustMoney();
     
 }
