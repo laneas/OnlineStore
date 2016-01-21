@@ -29,10 +29,20 @@ public class Sale extends Transaction{
     }
     
     //adding item back to inventory 
-    public int adjustInventory(){
+    @Override
+    public void adjustInventory(){
         //should return type in getQuantity be an integer?
+        //Ardjen: this method *shouldn't* have to return an integer. This will directly interact with Inventory's getters and setters
 //       return inventory.getQuantity() - purchaseQuantity;
-        return 0;
+        //return 0;
+    }
+    
+    /*
+    adjustMoney should increase funds according to the bill
+    */
+    public void adjustMoney()
+    {
+        
     }
     
     }

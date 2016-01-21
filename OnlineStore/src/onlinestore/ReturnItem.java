@@ -29,9 +29,20 @@ public class ReturnItem extends Transaction{
     }
     
     //adding item back to inventory 
-    public int adjustInventory(){
+    @Override
+    public void adjustInventory(){
         //should return type in getQuantity be an integer?
+        //Ardjen: see Sale for comments
 //       return inventory.getQuantity() + returnQuantity;
-        return 0;
+        //return 0;
+    }
+    
+    /*
+        Should decrease money according to item price
+    */
+    @Override
+    public void adjustMoney()
+    {
+        
     }
 }
