@@ -17,8 +17,7 @@ public class ReturnItem extends Transaction{
     // i will represent index of items
     private int i;
     private int returnQuantity;
-    private Item item;
-    private Inventory inventory;
+
     
     ReturnItem(int transNum, double refund){
         super(transNum);
@@ -44,6 +43,6 @@ public class ReturnItem extends Transaction{
     @Override
     public void adjustMoney()
     {
-        
+        storeLedgerBalance = storeLedgerBalance - refund;
     }
 }

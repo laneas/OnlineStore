@@ -6,6 +6,8 @@ public class Item
     private double price;
     private String name;
     private String description;
+    // int onHand
+    // double cost: amount that it costs the vendor 
     
     public Item(int theID, double thePrice, String theName)
     {

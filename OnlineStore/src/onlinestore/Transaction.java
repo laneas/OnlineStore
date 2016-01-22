@@ -5,6 +5,8 @@ public abstract class Transaction
     //private Customer customer;
     private int transactionID;
     protected Inventory inventory;
+    protected double storeLedgerBalance;
+
 //    protected Customer customer;
     
     public Transaction(int transNum)

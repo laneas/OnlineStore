@@ -28,6 +28,7 @@ public class Sale extends Transaction {
     }
 
     //adding item back to inventory 
+    @Override
     public void adjustInventory() {
 
         //should return type in getQuantity be an integer?
@@ -41,7 +42,9 @@ public class Sale extends Transaction {
      adjustMoney should increase funds according to the bill
      */
     public void adjustMoney() {
-
+        
+        storeLedgerBalance = storeLedgerBalance + tender;
+        
     }
 
 }

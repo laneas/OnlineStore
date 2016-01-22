@@ -52,9 +52,10 @@ public class Order {
                     break;
 
                 case ("inventory adjustment"):
-                    transaction.inventory.listInventory();
-                    System.out.println("Which item? ");
-                    transaction.inventory.idLookup(in.nextInt());
+//                    transaction.inventory.listInventory();
+//                    System.out.println("Which item? ");
+//                    transaction.inventory.idLookup(in.nextInt());
+                    System.out.println("Adjusting Inventory");
                     break;
 
                 case ("quit"):
@@ -69,4 +70,9 @@ public class Order {
         }
 
     }
+    
+    // ensure that the item and number sold will be in inventory
+    public void validateInventory(){
+            
+        }
 }
