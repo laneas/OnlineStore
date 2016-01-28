@@ -2,11 +2,11 @@ package onlinestore;
 
 public class OnlineStore
 {
-    public static Order order;
+    public static TransactionHandler handler;
     
     public static void main(String[] args)
     {
-        order = new Order();
+        handler = new TransactionHandler();
     }
     
 }

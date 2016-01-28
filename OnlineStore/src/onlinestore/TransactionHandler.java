@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author jakesemple
  */
-public class Order {
+public class TransactionHandler {
 
     private Transaction transaction;
     private int OrderID;
@@ -22,7 +22,7 @@ public class Order {
     private Item item;
     private boolean flag;
 
-    Order() {
+    TransactionHandler() {
         flag = true;
 
         while (flag) {
