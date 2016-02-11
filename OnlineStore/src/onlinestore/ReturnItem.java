@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author jakesemple
  */
-public class ReturnItem extends Transaction{
+public class ReturnItem extends Transaction implements Runnable{
     private ArrayList<Item> items;
     private double refund;
 
@@ -23,6 +23,13 @@ public class ReturnItem extends Transaction{
         
         inventory.setQuantity(null);
         
+    }
+    
+    @Override
+    public void run()
+    {
+        adjustInventory();
+        //adjustMoney();
     }
     
     //adding item back to inventory 

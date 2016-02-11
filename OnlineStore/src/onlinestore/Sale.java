@@ -11,13 +11,21 @@ import java.util.ArrayList;
  *
  * @author jakesemple
  */
-public class Sale extends Transaction {
+public class Sale extends Transaction implements Runnable
+{
 
     private ArrayList<Item> items;
 
-    Sale(int transNum, Inventory inv, double tender) 
+    public Sale(int transNum, Inventory inv, double tender) 
     {
         super(transNum, inv);
+    }
+
+    @Override
+    public void run()
+    {
+        adjustInventory();
+        //adjustMoney();
     }
 
     //adding item back to inventory 

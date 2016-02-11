@@ -9,7 +9,7 @@ package onlinestore;
  *
  * @author Ardjen
  */
-public class Exchange extends Transaction
+public class Exchange extends Transaction implements Runnable
 {
     private Item returnItem;
     private Item exchangeItem;
@@ -19,6 +19,13 @@ public class Exchange extends Transaction
         super(transID, inv);
         returnItem = rItem;
         exchangeItem = eItem;
+    }
+    
+    @Override
+    public void run()
+    {
+        adjustInventory();
+        //adjustMoney();
     }
 
     @Override
