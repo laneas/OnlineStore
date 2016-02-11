@@ -14,9 +14,9 @@ public class InventoryAdjustment extends Transaction
     private Item adjustItem;
     private int quantity;
     
-    public InventoryAdjustment(int transID, Item aItem, int theQuantity)
+    public InventoryAdjustment(int transID, Inventory inv, Item aItem, int theQuantity)
     {
-        super(transID);
+        super(transID, inv);
         adjustItem = aItem;
         quantity = theQuantity;
     }

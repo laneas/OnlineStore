@@ -14,37 +14,49 @@ import java.util.ArrayList;
 public class Sale extends Transaction {
 
     private ArrayList<Item> items;
-    private double tender;
-    // i will represent index of items
-    private int i;
-    private int returnQuantity;
 
-    Sale(int transNum, double tender) {
-        super(transNum);
-        this.tender = tender;
-
-        inventory.setQuantity(null);
-
+    Sale(int transNum, Inventory inv, double tender) 
+    {
+        super(transNum, inv);
     }
 
     //adding item back to inventory 
     @Override
-    public void adjustInventory() {
-
-        //should return type in getQuantity be an integer?
-        //Ardjen: this method *shouldn't* have to return an integer. This will directly interact with Inventory's getters and setters
-//       return inventory.getQuantity() - purchaseQuantity;
-        //return 0;
+    public void adjustInventory() 
+    {
+       for(int i = 0; i < items.size(); i++)
+        {
+            for(int j = 0; j < inventory.getItems().size(); j++)
+            {
+                if(items.get(i).equals(inventory.getItems().get(j)) && inventory.getQuantity().get(j) != 0)
+                {
+                    int temp = inventory.getQuantity().get(j);
+                    inventory.getQuantity().set(j, temp--);
+                }
+                
+                if(items.get(i).equals(inventory.getItems().get(j)) && inventory.getQuantity().get(j) == 0)
+                {
+                    System.out.println("This item is out of stock");
+                    //perhaps consider removing the item from the customer's item ArrayList before charging
+                }
+            }
+        }
     }
 
 
     /*
      adjustMoney should increase funds according to the bill
      */
-    public void adjustMoney() {
+    public void adjustMoney() 
+    {
+        double bill = 0.0;
         
-        storeLedgerBalance = storeLedgerBalance + tender;
+        for(int i = 0; i < items.size(); i++)
+        {
+            bill = bill + items.get(i).getPrice();
+        }
         
+        storeLedgerBalance = storeLedgerBalance + bill;
     }
 
 }

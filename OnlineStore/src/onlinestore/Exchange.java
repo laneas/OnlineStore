@@ -14,9 +14,9 @@ public class Exchange extends Transaction
     private Item returnItem;
     private Item exchangeItem;
     
-    public Exchange(int transID, Item rItem, Item eItem)
+    public Exchange(int transID, Inventory inv, Item rItem, Item eItem)
     {
-        super(transID);
+        super(transID, inv);
         returnItem = rItem;
         exchangeItem = eItem;
     }
@@ -24,16 +24,39 @@ public class Exchange extends Transaction
     @Override
     public void adjustInventory()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
-        //Add return Item to Inventory
-        //Remove exchangeItem to Inventory
+        /*
+        Note, we should be prepared to handle the exception
+        where the replacement/exchange item is not in stock.
+        In which case, the transaction should not process.
+        This current method does not handle that exception.
+        */
+        for(int i = 0; i < inventory.getItems().size(); i++)
+        {
+            if(returnItem.equals(inventory.getItems().get(i)))
+            {
+                int temp = inventory.getQuantity().get(i);
+                inventory.getQuantity().set(i, temp++);
+            }
+       }
+        
+       for(int i = 0; i < inventory.getItems().size(); i++)
+       {
+           if(exchangeItem.equals(inventory.getItems().get(i)))
+           {
+               int temp = inventory.getQuantity().get(i);
+               inventory.getQuantity().set(i, temp--);
+           }
+       }
     }
 
     @Override
     public void adjustMoney()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
-        //Should not have to change Tender
+        /*
+        In a normal case, we shouldn't have to change tender.
+        However, there might be special cases.
+        Unless explicitly stated, we should be prepared to handle these.
+        */
     }
 
     /**

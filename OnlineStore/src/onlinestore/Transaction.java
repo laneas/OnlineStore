@@ -1,17 +1,18 @@
 package onlinestore;
 
-public abstract class Transaction
+public abstract class Transaction extends Thread
 {
     //private Customer customer;
-    private int transactionID;
+    protected int transactionID;
     protected Inventory inventory;
     protected double storeLedgerBalance;
 
 //    protected Customer customer;
     
-    public Transaction(int transNum)
+    public Transaction(int transNum, Inventory theInventory)
     {
         transactionID = transNum;
+        inventory = theInventory;
     }
     
     /*
@@ -20,5 +21,15 @@ public abstract class Transaction
     */
     public abstract void adjustInventory();
     public abstract void adjustMoney();
+
+    public Inventory getInventory()
+    {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory)
+    {
+        this.inventory = inventory;
+    }
     
 }
