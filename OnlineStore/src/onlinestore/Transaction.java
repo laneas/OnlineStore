@@ -1,18 +1,22 @@
 package onlinestore;
 
+import java.util.ArrayList;
+
 public abstract class Transaction extends Thread
 {
     //private Customer customer;
     protected int transactionID;
     protected Inventory inventory;
     protected double storeLedgerBalance;
+    protected ArrayList<Item> customerItems;
 
 //    protected Customer customer;
     
-    public Transaction(int transNum, Inventory theInventory)
+    public Transaction(int transNum, Inventory theInventory, ArrayList<Item> theCustomerItems)
     {
         transactionID = transNum;
         inventory = theInventory;
+        customerItems = theCustomerItems;
     }
     
     /*
@@ -31,5 +35,4 @@ public abstract class Transaction extends Thread
     {
         this.inventory = inventory;
     }
-    
 }

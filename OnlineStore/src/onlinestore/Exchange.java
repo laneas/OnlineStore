@@ -5,6 +5,8 @@
  */
 package onlinestore;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ardjen
@@ -14,9 +16,9 @@ public class Exchange extends Transaction implements Runnable
     private Item returnItem;
     private Item exchangeItem;
     
-    public Exchange(int transID, Inventory inv, Item rItem, Item eItem)
+    public Exchange(int transID, Inventory inv, ArrayList<Item> custItems, Item rItem, Item eItem)
     {
-        super(transID, inv);
+        super(transID, inv, custItems);
         returnItem = rItem;
         exchangeItem = eItem;
     }

@@ -16,9 +16,10 @@ public class Sale extends Transaction implements Runnable
 
     private ArrayList<Item> items;
 
-    public Sale(int transNum, Inventory inv, double tender) 
+    public Sale(int transNum, Inventory inv, ArrayList<Item> custItems) 
     {
-        super(transNum, inv);
+        super(transNum, inv, custItems);
+        items = custItems;
     }
 
     @Override
@@ -33,13 +34,14 @@ public class Sale extends Transaction implements Runnable
     public void adjustInventory() 
     {
        for(int i = 0; i < items.size(); i++)
-        {
+       {
             for(int j = 0; j < inventory.getItems().size(); j++)
             {
                 if(items.get(i).equals(inventory.getItems().get(j)) && inventory.getQuantity().get(j) != 0)
                 {
                     int temp = inventory.getQuantity().get(j);
-                    inventory.getQuantity().set(j, temp--);
+                    temp = temp - 1;
+                    inventory.getQuantity().set(j, temp);
                 }
                 
                 if(items.get(i).equals(inventory.getItems().get(j)) && inventory.getQuantity().get(j) == 0)

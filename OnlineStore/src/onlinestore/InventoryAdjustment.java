@@ -5,6 +5,8 @@
  */
 package onlinestore;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ardjen
@@ -14,10 +16,9 @@ public class InventoryAdjustment extends Transaction
     private Item adjustItem;
     private int quantity;
     
-    public InventoryAdjustment(int transID, Inventory inv, Item aItem, int theQuantity)
+    public InventoryAdjustment(int transID, Inventory inv, ArrayList<Item> custItems, int theQuantity)
     {
-        super(transID, inv);
-        adjustItem = aItem;
+        super(transID, inv, custItems);
         quantity = theQuantity;
     }
 

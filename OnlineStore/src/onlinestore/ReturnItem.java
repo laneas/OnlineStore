@@ -16,8 +16,8 @@ public class ReturnItem extends Transaction implements Runnable{
     private double refund;
 
     
-    ReturnItem(int transNum, Inventory inv, double refund){
-        super(transNum, inv);
+    ReturnItem(int transNum, Inventory inv, ArrayList<Item> custItems){
+        super(transNum, inv, custItems);
         this.refund = refund;
         
         
