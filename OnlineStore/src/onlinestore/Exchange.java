@@ -13,10 +13,12 @@ import java.util.ArrayList;
  */
 public class Exchange extends Transaction implements Runnable
 {
+    ArrayList<Item> returnItems;
     
     public Exchange(int transID, Inventory inv, ArrayList<Item> custItems)
     {
         super(transID, inv, custItems);
+        returnItems = custItems;
     }
     
     @Override
