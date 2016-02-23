@@ -6,6 +6,7 @@ public class Inventory
 {
     private ArrayList<Item> items;
     private ArrayList<Integer> quantity;
+    private double tender;
     
     public Inventory()
     {
@@ -71,6 +72,16 @@ public class Inventory
             return items.get(index);
         }
     }
+    
+    public double getTender()
+    {
+        return tender;
+    }
+    
+    public void setTender(double theTender)
+    {
+        tender = theTender;
+    }
 
     /**
      * @return the items
@@ -102,5 +113,90 @@ public class Inventory
     public void setQuantity(ArrayList<Integer> quantity)
     {
         this.quantity = quantity;
+    }
+    
+    public void addItem(Item theItem)
+    {
+        boolean itemFound = false;
+        
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).equals(theItem))
+            {
+                itemFound = true;
+                int temp = quantity.get(i);
+                temp++;
+                quantity.set(i, temp);
+            }
+        }
+        if(!itemFound)
+        {
+            items.add(theItem);
+            quantity.add(1);
+        }
+    }
+    
+    public void addItem(Item theItem, int theQuantity)
+    {
+        boolean itemFound = false;
+        
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).equals(theItem))
+            {
+                itemFound = true;
+                int temp = quantity.get(i);
+                temp = temp + theQuantity;
+                quantity.set(i, temp);
+            }
+        }
+        if(!itemFound)
+        {
+            items.add(theItem);
+            quantity.add(theQuantity);
+        }
+    }
+    
+    public void removeItem(Item theItem)
+    {
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).equals(theItem) && quantity.get(i) > 0)
+            {
+                int temp = quantity.get(i);
+                temp--;
+                quantity.set(i, temp);
+            }
+            
+            if(items.get(i).equals(theItem) && quantity.get(i) <= 0)
+            {
+                //notify user than transaction cannot be made
+            }
+        }
+    }
+    
+    public void removeItem(Item theItem, int theQuantity)
+    {
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).equals(theItem) && quantity.get(i) > 0)
+            {
+                for(int j = 0; j < theQuantity; j++)
+                {
+                    int current = quantity.get(i);
+                    int expected = current - 1;
+                    
+                    if(expected > 0)
+                    {
+                        quantity.set(i, expected);
+                    }
+                    else
+                    {
+                        //notifiy user that transaction was not possible
+                        quantity.set(i, current);
+                    }
+                }
+            }
+        }
     }
 }

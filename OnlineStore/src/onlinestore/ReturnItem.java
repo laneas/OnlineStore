@@ -40,11 +40,7 @@ public class ReturnItem extends Transaction implements Runnable{
         {
             for(int j = 0; j < inventory.getItems().size(); j++)
             {
-                if(items.get(i).equals(inventory.getItems().get(j)))
-                {
-                    int temp = inventory.getQuantity().get(j);
-                    inventory.getQuantity().set(j, temp++);
-                }
+                inventory.addItem(items.get(i));
             }
         }
     }

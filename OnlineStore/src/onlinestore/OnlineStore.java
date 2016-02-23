@@ -28,17 +28,11 @@ public class OnlineStore
         
         i.listInventory();
         System.out.println();
-        for(int k = 0; k < 20; k++)
+        
+        for(int k = 0; k < 50; k++)
         {
-            Transaction s1 = new Sale(1, i, customerItems);
-            s1.start();
-            try
-            {
-                Thread.sleep(10);
-            } catch (InterruptedException ex)
-            {
-                Logger.getLogger(OnlineStore.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Transaction s = new Sale(1, i, customerItems);
+            s.start();
         }
         
 //        Transaction s1 = new Sale(1, i, customerItems);

@@ -57,8 +57,7 @@ public class InventoryAdjustment extends Transaction
     @Override
     public void adjustInventory()
     {
-        throw new UnsupportedOperationException("Not supported yet."); 
-        //find item and adjust accordingly
+        inventory.addItem(adjustItem, quantity);
     }
 
     @Override

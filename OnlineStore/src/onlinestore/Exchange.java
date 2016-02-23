@@ -13,14 +13,10 @@ import java.util.ArrayList;
  */
 public class Exchange extends Transaction implements Runnable
 {
-    private Item returnItem;
-    private Item exchangeItem;
     
-    public Exchange(int transID, Inventory inv, ArrayList<Item> custItems, Item rItem, Item eItem)
+    public Exchange(int transID, Inventory inv, ArrayList<Item> custItems)
     {
         super(transID, inv, custItems);
-        returnItem = rItem;
-        exchangeItem = eItem;
     }
     
     @Override
@@ -39,23 +35,13 @@ public class Exchange extends Transaction implements Runnable
         In which case, the transaction should not process.
         This current method does not handle that exception.
         */
-        for(int i = 0; i < inventory.getItems().size(); i++)
+        for(int i = 0; i < customerItems.size(); i++)
         {
-            if(returnItem.equals(inventory.getItems().get(i)))
+            for(int k = 0; k < inventory.getItems().size(); k++)
             {
-                int temp = inventory.getQuantity().get(i);
-                inventory.getQuantity().set(i, temp++);
+                
             }
-       }
-        
-       for(int i = 0; i < inventory.getItems().size(); i++)
-       {
-           if(exchangeItem.equals(inventory.getItems().get(i)))
-           {
-               int temp = inventory.getQuantity().get(i);
-               inventory.getQuantity().set(i, temp--);
-           }
-       }
+        }
     }
 
     @Override
@@ -66,37 +52,5 @@ public class Exchange extends Transaction implements Runnable
         However, there might be special cases.
         Unless explicitly stated, we should be prepared to handle these.
         */
-    }
-
-    /**
-     * @return the returnItem
-     */
-    public Item getReturnItem()
-    {
-        return returnItem;
-    }
-
-    /**
-     * @param returnItem the returnItem to set
-     */
-    public void setReturnItem(Item returnItem)
-    {
-        this.returnItem = returnItem;
-    }
-
-    /**
-     * @return the exchangeItem
-     */
-    public Item getExchangeItem()
-    {
-        return exchangeItem;
-    }
-
-    /**
-     * @param exchangeItem the exchangeItem to set
-     */
-    public void setExchangeItem(Item exchangeItem)
-    {
-        this.exchangeItem = exchangeItem;
     }
 }

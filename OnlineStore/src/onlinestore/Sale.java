@@ -39,9 +39,7 @@ public class Sale extends Transaction implements Runnable
             {
                 if(items.get(i).equals(inventory.getItems().get(j)) && inventory.getQuantity().get(j) != 0)
                 {
-                    int temp = inventory.getQuantity().get(j);
-                    temp = temp - 1;
-                    inventory.getQuantity().set(j, temp);
+                    inventory.removeItem(items.get(i));
                 }
                 
                 if(items.get(i).equals(inventory.getItems().get(j)) && inventory.getQuantity().get(j) == 0)
