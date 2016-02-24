@@ -6,12 +6,13 @@ public class Inventory
 {
     private ArrayList<Item> items;
     private ArrayList<Integer> quantity;
-    private double tender;
+    private double balance;
     
     public Inventory()
     {
         items = new ArrayList<Item>();
         quantity = new ArrayList<Integer>();
+        balance = 0.0;
     }
     
     //prints entire inventory
@@ -73,16 +74,6 @@ public class Inventory
         }
     }
     
-    public double getTender()
-    {
-        return tender;
-    }
-    
-    public void setTender(double theTender)
-    {
-        tender = theTender;
-    }
-
     /**
      * @return the items
      */
@@ -198,5 +189,15 @@ public class Inventory
                 }
             }
         }
+    }
+
+    public double getBalance()
+    {
+        return balance;
+    }
+
+    public void setBalance(double balance)
+    {
+        this.balance = balance;
     }
 }

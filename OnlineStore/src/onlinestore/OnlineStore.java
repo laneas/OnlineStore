@@ -20,18 +20,27 @@ public class OnlineStore
         ArrayList<Item> customerItems = new ArrayList<Item>();
         customerItems.add(bread);
         
+        ArrayList<Item> customerItems2 = new ArrayList<Item>();
+        customerItems2.add(gum);
+        
         Inventory i = new Inventory();
-          i.addItem(bread, 20);
-          i.addItem(milk, 20);
-          i.addItem(eggs, 20);
-          i.addItem(butter, 20);
-          i.addItem(chicken, 20);
-          i.addItem(gum, 20);
+          i.setBalance(1000000.00);
+          i.addItem(bread, 200);
+          i.addItem(milk, 200);
+          i.addItem(eggs, 200);
+          i.addItem(butter, 200);
+          i.addItem(chicken, 200);
+          i.addItem(gum, 200);
         i.listInventory();
         System.out.println();
         
-        Transaction s = new Sale(1, i, customerItems);
-        s.start();
+        for(int k = 0; k < 100; k++)
+        {
+            Transaction s = new Sale(1, i, customerItems);
+            Transaction r = new ReturnItem(1, i, customerItems2);
+            s.start();
+            r.start();
+        }
         
         
 //        Transaction s1 = new Sale(1, i, customerItems);

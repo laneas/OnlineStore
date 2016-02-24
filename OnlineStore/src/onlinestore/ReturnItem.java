@@ -20,8 +20,8 @@ public class ReturnItem extends Transaction implements Runnable{
         super(transNum, inv, custItems);
         this.refund = refund;
         
-        
-        inventory.setQuantity(null);
+        items = custItems;
+        inventory = inv;
         
     }
     
@@ -36,15 +36,20 @@ public class ReturnItem extends Transaction implements Runnable{
     @Override
     public void adjustInventory()
     {
-        for(int i = 0; i < items.size(); i++)
+        synchronized(inventory)
         {
-            for(int j = 0; j < inventory.getItems().size(); j++)
+            for(int i = 0; i < items.size(); i++)
             {
-                inventory.addItem(items.get(i));
+                for(int j = 0; j < inventory.getItems().size(); j++)
+                {
+                    if(items.get(i).equals(inventory.getItems().get(j)))
+                    {
+                        inventory.addItem(items.get(i));
+                    }
+                }
             }
         }
     }
-    
     /*
         Should decrease money according to item price
     */
