@@ -17,6 +17,8 @@ public class TestStore
     Inventory testInventory;
     ArrayList<Customer> customers;
     ArrayList<Item> customerItems;
+    ArrayList<Transaction> transactions;
+    int numOfSales = 0;
     
     public TestStore()
     {
@@ -24,6 +26,11 @@ public class TestStore
         testInventory = new Inventory();
         customers = new ArrayList<Customer>();
         customerItems = new ArrayList<Item>();
+        
+        for(int i = 0; i < 1; i++)
+        {
+            generateSale();
+        }
     }
     
     public void setup()
@@ -65,12 +72,22 @@ public class TestStore
     
     public void generateSale()
     {
+        numOfSales++;
+        customerItems.clear();
         int numOfSales = 1 + (int)(Math.random() * ((20 - 1) + 1));
         
         for(int i = 0; i < numOfSales; i++)
         {
             int itemIndex = 0 + (int)(Math.random() * (masterList.size() - 0) + 1);
-            
+            customerItems.add(masterList.get(itemIndex));
+        }
+        
+        //Sale s = new Sale()
+        
+        System.out.println("Sale #"+numOfSales+": ");
+        for(int i = 0; i < customerItems.size(); i++)
+        {
+            System.out.print(customerItems.get(i).getName()+", ");
         }
     }
 }
