@@ -57,7 +57,10 @@ public class InventoryAdjustment extends Transaction
     @Override
     public void adjustInventory()
     {
-        inventory.addItem(adjustItem, quantity);
+        synchronized(inventory)
+        {
+            inventory.addItem(adjustItem, quantity);
+        }
     }
 
     @Override

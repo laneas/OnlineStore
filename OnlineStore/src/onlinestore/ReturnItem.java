@@ -21,8 +21,6 @@ public class ReturnItem extends Transaction implements Runnable{
         this.refund = refund;
         
         items = custItems;
-        inventory = inv;
-        
     }
     
     @Override

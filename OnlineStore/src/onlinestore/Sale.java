@@ -25,7 +25,7 @@ public class Sale extends Transaction implements Runnable
     public void run()
     {
         adjustInventory();
-        //adjustMoney();
+        adjustMoney();
     }
 
     //adding item back to inventory 
@@ -66,7 +66,8 @@ public class Sale extends Transaction implements Runnable
             bill = bill + items.get(i).getPrice();
         }
         
-        storeLedgerBalance = storeLedgerBalance + bill;
+        double newBalance = inventory.getBalance() + bill;
+        inventory.setBalance(newBalance);
     }
 
 }

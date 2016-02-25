@@ -32,6 +32,7 @@ public class OnlineStore
           i.addItem(chicken, 200);
           i.addItem(gum, 200);
         i.listInventory();
+        System.out.println("---"+i.getBalance()+"---");
         System.out.println();
         
         for(int k = 0; k < 100; k++)
@@ -56,6 +57,7 @@ public class OnlineStore
             }
 
         i.listInventory();
+        System.out.println("---"+i.getBalance()+"---");
     }
     
 }
