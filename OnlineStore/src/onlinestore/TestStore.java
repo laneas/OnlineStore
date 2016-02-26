@@ -6,6 +6,8 @@
 package onlinestore;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +21,7 @@ public class TestStore
     ArrayList<Item> customerItems;
     ArrayList<Transaction> transactions;
     int numOfSales = 0;
+    int numOfReturns = 0;
     
     public TestStore()
     {
@@ -26,11 +29,30 @@ public class TestStore
         testInventory = new Inventory();
         customers = new ArrayList<Customer>();
         customerItems = new ArrayList<Item>();
+        transactions = new ArrayList<Transaction>();
         
-        for(int i = 0; i < 1; i++)
+        setup();
+        testInventory.listInventory();
+        
+        for(int i = 0; i < 1000; i++)
         {
-            generateSale();
+            //generateSale();
+            generateReturn();
         }
+        
+        for(int i = 0; i < transactions.size(); i++)
+        {
+            try
+        {
+            Thread.sleep(20);
+        } catch (InterruptedException ex)
+        {
+            Logger.getLogger(TestStore.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            transactions.get(i).start();
+        }
+        
+        testInventory.listInventory();
     }
     
     public void setup()
@@ -73,21 +95,44 @@ public class TestStore
     public void generateSale()
     {
         numOfSales++;
-        customerItems.clear();
-        int numOfSales = 1 + (int)(Math.random() * ((20 - 1) + 1));
+        customerItems = new ArrayList<Item>();
+        int numOfItems = 1 + (int)(Math.random() * ((1 - 1) + 1));
         
-        for(int i = 0; i < numOfSales; i++)
+        for(int i = 0; i < numOfItems; i++)
         {
             int itemIndex = 0 + (int)(Math.random() * (masterList.size() - 0) + 1);
-            customerItems.add(masterList.get(itemIndex));
+            customerItems.add(masterList.get(itemIndex - 1));
         }
         
-        //Sale s = new Sale()
-        
-        System.out.println("Sale #"+numOfSales+": ");
+        Sale s = new Sale(numOfSales, testInventory, customerItems);
+        transactions.add(s);
+        System.out.print("Sale #"+numOfSales+": ");
         for(int i = 0; i < customerItems.size(); i++)
         {
             System.out.print(customerItems.get(i).getName()+", ");
         }
+        System.out.println();
+    }
+    
+    public void generateReturn()
+    {
+        numOfReturns++;
+        customerItems = new ArrayList<Item>();
+        int numOfItems = 1 + (int)(Math.random() * ((1 - 1) + 1));
+        
+        for(int i = 0; i < numOfItems; i++)
+        {
+            int itemIndex = 0 + (int)(Math.random() * (masterList.size() - 0) + 1);
+            customerItems.add(masterList.get(itemIndex - 1));
+        }
+        
+        ReturnItem r = new ReturnItem(numOfReturns, testInventory, customerItems);
+        transactions.add(r);
+        System.out.print("Return #"+numOfReturns+": ");
+        for(int i = 0; i < customerItems.size(); i++)
+        {
+            System.out.print(customerItems.get(i).getName()+", ");
+        }
+        System.out.println();
     }
 }
