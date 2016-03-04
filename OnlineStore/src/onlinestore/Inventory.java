@@ -22,6 +22,7 @@ public class Inventory
         {
             System.out.println(items.get(i).getName()+": "+quantity.get(i));
         }
+        System.out.println("Store balance: " +balance);
     }
     
     //prints the item at index for the time being
