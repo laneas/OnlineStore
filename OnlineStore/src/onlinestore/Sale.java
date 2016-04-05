@@ -14,11 +14,13 @@ import java.util.ArrayList;
 public class Sale extends Transaction implements Runnable
 {
     private ArrayList<Item> items;
+    
 
-    public Sale(int transNum, Inventory inv, ArrayList<Item> custItems) 
+    public Sale(int transNum, Inventory inv, ArrayList<Item> custItems, double bill) 
     {
-        super(transNum, inv, custItems);
+        super(transNum, inv, custItems, bill);
         items = custItems;
+
     }
 
     @Override
@@ -59,8 +61,8 @@ public class Sale extends Transaction implements Runnable
      */
     public void adjustMoney() 
     {
-        double bill = 0.0;
-        
+        bill = 0.0;
+        synchronized(this){
         for(int i = 0; i < items.size(); i++)
         {
             bill = bill + items.get(i).getPrice();
@@ -68,6 +70,7 @@ public class Sale extends Transaction implements Runnable
         
         double newBalance = inventory.getBalance() + bill;
         inventory.setBalance(newBalance);
+    }
     }
 
 }

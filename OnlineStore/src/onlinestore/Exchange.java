@@ -15,9 +15,9 @@ public class Exchange extends Transaction implements Runnable
 {
     ArrayList<Item> returnItems;
     
-    public Exchange(int transID, Inventory inv, ArrayList<Item> custItems)
+    public Exchange(int transID, Inventory inv, ArrayList<Item> custItems, double bill)
     {
-        super(transID, inv, custItems);
+        super(transID, inv, custItems, bill);
         returnItems = custItems;
     }
     

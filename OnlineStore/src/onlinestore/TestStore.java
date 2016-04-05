@@ -72,11 +72,11 @@ public class TestStore
         Item gum     = new Item(6, 1.00, "gum");
         
         masterList.add(bread);
-        masterList.add(milk);
-        masterList.add(eggs);
-        masterList.add(butter);
-        masterList.add(chicken);
-        masterList.add(gum);
+//        masterList.add(milk);
+//        masterList.add(eggs);
+//        masterList.add(butter);
+//        masterList.add(chicken);
+//        masterList.add(gum);
     }
     
     public void inventorySetup()
@@ -98,8 +98,10 @@ public class TestStore
     {
         numOfSales++;
         customerItems = new ArrayList<Item>();
-        Double cartValue = 0.0;
-        int numOfItems = 1 + (int)(Math.random() * ((10 - 1) + 1));
+        Double cartValue =0.0;
+        Sale s = new Sale(numOfSales, testInventory, customerItems, cartValue);
+        cartValue = s.bill;
+        int numOfItems = 1 + (int)(Math.random() * ((1 - 1) + 1));
         
         for(int i = 0; i < numOfItems; i++)
         {
@@ -108,7 +110,7 @@ public class TestStore
             
         }
         
-        Sale s = new Sale(numOfSales, testInventory, customerItems);
+        
         transactions.add(s);
         System.out.print("Sale #"+numOfSales+": ");
         for(int i = 0; i < customerItems.size(); i++)
@@ -117,7 +119,7 @@ public class TestStore
             cartValue = cartValue + customerItems.get(i).getPrice();
             
         }
-        testInventory.setBalance(testInventory.getBalance()+cartValue);
+        //testInventory.setBalance(testInventory.getBalance()+cartValue);
         System.out.print(" cart price: "+cartValue+" added to store:"+testInventory.getBalance());
         System.out.println();
     }
@@ -135,7 +137,7 @@ public class TestStore
             customerItems.add(masterList.get(itemIndex - 1));
         }
         
-        ReturnItem r = new ReturnItem(numOfReturns, testInventory, customerItems);
+        ReturnItem r = new ReturnItem(numOfReturns, testInventory, customerItems, 0);
         transactions.add(r);
         System.out.print("Return #"+numOfReturns+": ");
         for(int i = 0; i < customerItems.size(); i++)

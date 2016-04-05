@@ -9,14 +9,16 @@ public abstract class Transaction extends Thread
     protected Inventory inventory;
     protected double storeLedgerBalance;
     protected ArrayList<Item> customerItems;
+    protected double bill;
 
 //    protected Customer customer;
     
-    public Transaction(int transNum, Inventory theInventory, ArrayList<Item> theCustomerItems)
+    public Transaction(int transNum, Inventory theInventory, ArrayList<Item> theCustomerItems, double bill)
     {
         transactionID = transNum;
         inventory = theInventory;
         customerItems = theCustomerItems;
+        this.bill = bill;
     }
     
     /*

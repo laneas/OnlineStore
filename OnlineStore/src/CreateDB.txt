@@ -1,0 +1,98 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2016-04-05 18:13
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Jake Semple
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+CREATE TABLE IF NOT EXISTS `Store1`.`Stock` (
+  `Item_Item_ID` BIGINT(20) NOT NULL,
+  `Inventory_InventoryID` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`Item_Item_ID`, `Inventory_InventoryID`),
+  INDEX `fk_Item_has_Inventory_Inventory1_idx` (`Inventory_InventoryID` ASC),
+  INDEX `fk_Item_has_Inventory_Item_idx` (`Item_Item_ID` ASC),
+  CONSTRAINT `fk_Item_has_Inventory_Item`
+    FOREIGN KEY (`Item_Item_ID`)
+    REFERENCES `Store1`.`Item` (`Item_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Item_has_Inventory_Inventory1`
+    FOREIGN KEY (`Inventory_InventoryID`)
+    REFERENCES `Store1`.`Inventory` (`InventoryID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+ALTER TABLE `Store1`.`Transactions` 
+ADD INDEX `fk_Transactions_Customers1_idx` (`Customers_Customer_ID` ASC),
+ADD INDEX `fk_Transactions_Inventory1_idx` (`Inventory_InventoryID` ASC),
+DROP INDEX `fk_Transactions_Inventory1_idx` ,
+DROP INDEX `fk_Transactions_Customers1_idx` ;
+
+CREATE TABLE IF NOT EXISTS `Store1`.`Sale` (
+  `Item_Item_ID` BIGINT(20) NOT NULL,
+  `Transactions_TransactionID` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`Item_Item_ID`, `Transactions_TransactionID`),
+  INDEX `fk_Item_has_Transactions_Transactions1_idx` (`Transactions_TransactionID` ASC),
+  INDEX `fk_Item_has_Transactions_Item1_idx` (`Item_Item_ID` ASC),
+  CONSTRAINT `fk_Item_has_Transactions_Item1`
+    FOREIGN KEY (`Item_Item_ID`)
+    REFERENCES `Store1`.`Item` (`Item_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Item_has_Transactions_Transactions1`
+    FOREIGN KEY (`Transactions_TransactionID`)
+    REFERENCES `Store1`.`Transactions` (`TransactionID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS `Store1`.`Adjustment` (
+  `Item_Item_ID` BIGINT(20) NOT NULL,
+  `Transactions_TransactionID` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`Item_Item_ID`, `Transactions_TransactionID`),
+  INDEX `fk_Item_has_Transactions1_Transactions1_idx` (`Transactions_TransactionID` ASC),
+  INDEX `fk_Item_has_Transactions1_Item1_idx` (`Item_Item_ID` ASC),
+  CONSTRAINT `fk_Item_has_Transactions1_Item1`
+    FOREIGN KEY (`Item_Item_ID`)
+    REFERENCES `Store1`.`Item` (`Item_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Item_has_Transactions1_Transactions1`
+    FOREIGN KEY (`Transactions_TransactionID`)
+    REFERENCES `Store1`.`Transactions` (`TransactionID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+CREATE TABLE IF NOT EXISTS `Store1`.`Exchange` (
+  `Item_Exchanged` BIGINT(20) NOT NULL,
+  `Item_Returned` BIGINT(20) NOT NULL,
+  `Transactions_TransactionID` BIGINT(20) NOT NULL,
+  PRIMARY KEY (`Item_Exchanged`, `Transactions_TransactionID`),
+  INDEX `fk_Item_has_Transactions2_Transactions1_idx` (`Transactions_TransactionID` ASC),
+  INDEX `fk_Item_has_Transactions2_Item1_idx` (`Item_Exchanged` ASC),
+  CONSTRAINT `fk_Item_has_Transactions2_Item1`
+    FOREIGN KEY (`Item_Exchanged`)
+    REFERENCES `Store1`.`Item` (`Item_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Item_has_Transactions2_Transactions1`
+    FOREIGN KEY (`Transactions_TransactionID`)
+    REFERENCES `Store1`.`Transactions` (`TransactionID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
